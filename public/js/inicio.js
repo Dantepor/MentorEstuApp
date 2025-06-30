@@ -1105,3 +1105,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error cargando publicidad:', err);
         });
 });
+
+
+function confirmarCierreSesion() {
+    const confirmacion = confirm("¿Desea salir de esta cuenta?");
+    if (confirmacion) {
+        // Cierra sesión y redirige al login
+        window.location.href = "/login.html";
+    }
+}

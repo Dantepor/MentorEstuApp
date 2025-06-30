@@ -1290,6 +1290,21 @@ function editarPublicidad(id, imagen, link) {
 }
 
 
+    function cerrarSesion() {
+        if (confirm("¿Desea salir de esta cuenta?")) {
+            // Hacer logout en el backend
+            fetch('/api/auth/logout', {
+                method: 'POST'
+            }).then(() => {
+                window.location.href = '/login.html';
+            }).catch(err => {
+                alert('Error al cerrar sesión');
+            });
+        }
+    }
+
+
+
 
 
 // Ejecutar al cargar la página
