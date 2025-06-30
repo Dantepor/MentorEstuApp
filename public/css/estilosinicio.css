@@ -1,0 +1,2106 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #f7f7f8;
+    color: #1a1a1b;
+    font-size: 1rem;
+    height: 100vh;
+    
+    /* Altura completa del viewport */
+}
+
+
+/*PERFIL DE USUARIO*/
+/* Cuadro de información del usuario */
+#user-info-box {
+    display: none;
+    background-color: #ffffff; /* blanco */
+    color: #000000; /* texto negro */
+    padding: 15px;
+    border-radius: 8px;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    z-index: 1000;
+    width: 260px;
+    border: 0.3rem solid #003A6D; /* ← grosor ajustado aquí */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Imagen del usuario dentro del cuadro */
+#user-info-box img {
+    display: block;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+/* Texto del panel */
+#user-info-box p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Botones */
+.user-info-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.user-info-actions button {
+    background-color: #003A6D; /* fondo azul fuerte */
+    color: white; /* texto blanco */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.user-info-actions button:hover {
+    background-color: #002c54; /* azul más oscuro al pasar el mouse */
+}
+
+
+
+/* Clase para mostrar */
+#user-info-box.show {
+    display: block;
+}
+
+#user-info-box {
+    display: none;
+    /* ...otros estilos... */
+}
+#user-info-box.show {
+    display: block;
+}
+
+
+/* === SECCIÓN PERFIL DE USUARIO === */
+/* === SECCIÓN PERFIL DE USUARIO === */
+#perfil {
+    display: none;
+    width: 100%;
+    padding: 2rem;
+    background-color: #ffffff;
+    color: #003A6D;
+    box-sizing: border-box;
+}
+
+/* Título */
+#perfil h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Formulario */
+#formEditarPerfil {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Imagen y archivo */
+.foto-usuario-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.foto-usuario-container img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #003A6D;
+    margin-bottom: 0.5rem;
+}
+
+.foto-usuario-container input[type="file"] {
+    border: none;
+    background: none;
+    color: #003A6D;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Campos */
+#formEditarPerfil label {
+    font-weight: bold;
+}
+
+#formEditarPerfil input[type="text"],
+#formEditarPerfil input[type="email"] {
+    padding: 0.7rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Botones */
+.botones-accion {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.botones-accion button {
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botones-accion button[type="submit"] {
+    background-color: #003A6D;
+    color: white;
+}
+
+.botones-accion button[type="submit"]:hover {
+    background-color: #005199;
+}
+
+.botones-accion #cancelarEditar {
+    background-color: #e0e0e0;
+    color: #003A6D;
+}
+
+.botones-accion #cancelarEditar:hover {
+    background-color: #cccccc;
+}
+
+
+
+
+
+
+
+/* ===== HEADER ===== */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5rem;
+    background-color: #003A6D;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    height: 5rem;
+    /* igual que el que usas */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    color: white;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.logo-img {
+    height: 2.5rem;
+}
+
+.header-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 60%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+}
+
+.header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    /* separación entre imágenes */
+    position: relative;
+}
+
+/* Estilo para las 3 imágenes a la izquierda del avatar */
+.extra-img {
+    width: 1.8rem;
+    height: 1.8rem;
+    object-fit: cover;
+}
+
+
+/* Estilo del avatar principal */
+.avatar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar {
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 0.2rem;
+    /* espacio vacío */
+    background-clip: content-box;
+    background-color: transparent;
+    box-sizing: border-box;
+    border: 0.1rem solid white;
+    /* borde blanco */
+}
+
+/* Punto verde */
+.status-dot {
+    position: absolute;
+    bottom: -0.1rem;
+    /* lo bajamos un poco más */
+    right: 0.1rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: #00d800;
+    border: 2px solid white;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+
+
+
+
+/* ===== DROPDOWN MENU ===== */
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 2.2rem;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    min-width: 10rem;
+    z-index: 10;
+    flex-direction: column;
+}
+
+.dropdown-menu a {
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.show {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== SECCIONES DE LA SIDEBAR COMO CONTENEDORES SEPARADOS ===== */
+.sidebar-content>div {
+    background-color: #e6e6e6;
+    /* Gris claro */
+    padding: 0.3rem 1rem;
+    /* 0.5rem arriba/abajo, 1rem izquierda/derecha */
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.05rem 0.15rem rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* Estilo para los ítems de la sección principal */
+.seccion-principal ul.menu li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.5rem;
+    /* Altura: 0.5rem, Costados: 1rem */
+}
+
+/* Tamaño uniforme de los íconos-imagen */
+.seccion-principal .menu-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+
+
+
+/* Sección cursos: padding uniforme */
+.seccion-cursos {
+    padding: 0.5rem;
+    /* Altura y ancho */
+}
+
+/* Imagen de flecha y + con tamaño proporcional */
+.icono-cursos,
+.icono-curso {
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+}
+
+.titulo-cursos {
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* Necesario para posicionar la flecha */
+    padding-right: 1.5rem;
+    /* Espacio para que el texto no se monte con la flecha */
+    margin-bottom: 1rem;
+}
+
+/* Imagen de flecha a la derecha absoluta */
+.titulo-cursos .icono-cursos {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+}
+
+/* + y texto alineados con separación de 1rem */
+.unete-curso {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* Separación entre imagen y texto */
+    padding: 0.5rem 0;
+    /* 0.5rem arriba y abajo */
+}
+
+
+
+
+
+/*SECCION CONTACTOS*/
+.seccion-contactos {
+    margin: 0;
+    padding: 0.5rem;
+    /* padding completo */
+}
+
+.titulo-contactos {
+    display: flex;
+    justify-content: space-between;
+    /* texto a la izquierda, flecha a la derecha */
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.flecha-contacto {
+    width: 1.25rem;
+    height: 1.25rem;
+    object-fit: contain;
+}
+
+.contacto {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* separación entre imagen y texto */
+    margin-bottom: 1rem;
+}
+
+.contacto-img {
+    width: 2.5rem;
+    /* equivalente a 40px */
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+
+/*SECCION COMUNIDADES*/
+.seccion-comunidades {
+    padding: 0.5rem;
+    /* Espaciado completo */
+    margin: 0;
+    /* Sin márgenes adicionales */
+}
+
+.titulo-comunidades {
+    display: flex;
+    justify-content: space-between;
+    /* Texto a la izquierda, flecha a la derecha */
+    align-items: center;
+    margin-bottom: 0.5rem;
+    /* Separación hacia el siguiente bloque */
+}
+
+.flecha-comunidad {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+}
+
+.comunidad {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Separación entre imagen y texto */
+    margin-bottom: 0.5rem;
+    /* Separación con posibles otros elementos debajo */
+}
+
+.comunidad-img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+/*SECCION RECURSOS*/
+.seccion-recursos {
+    padding: 0.5rem;
+    margin: 0;
+}
+
+.titulo-recursos {
+    display: flex;
+    justify-content: space-between;
+    /* Flecha al borde derecho */
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.flecha-recurso {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+}
+
+.recurso {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    /* Separación entre imagen y texto */
+    margin-bottom: 1rem;
+    /* ✅ Separación entre cada recurso */
+}
+
+.recurso-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ===== LAYOUT ===== */
+.container {
+    display: flex;
+    padding: 1rem 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+    /* igual que la altura del header */
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+}
+
+.rightbar {
+    flex: 0 0 20%;
+    min-width: 12rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    height: fit-content;
+}
+
+
+.sidebar {
+    flex: 0 0 20%;
+    min-width: 12rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    height: calc(100vh - 3rem - 4rem);
+    overflow-y: scroll;
+    /* Permite scroll */
+    -ms-overflow-style: none;
+    /* IE y Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Ocultar scroll para Chrome, Safari y Opera */
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+.sidebar ul,
+.rightbar ul {
+    list-style: none;
+}
+
+.sidebar li,
+.rightbar li {
+    cursor: pointer;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    margin-top: 0.6rem;
+    border-radius: 0.4rem;
+}
+
+.stats {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.6rem;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+
+/*SECCION PRINCIPAL*/
+
+/* Scroll oculto pero funcional en el main */
+#main-content {
+    height: calc(100vh - 3rem - 4rem);
+    /* Resta altura del header fijo */
+    overflow-y: scroll;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    font-family: 'Montserrat', sans-serif;
+}
+
+#main-content::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari */
+}
+
+/* Estilo para la sección principal */
+#principal {
+    padding: 0.5rem 0;
+    background-color: #f5f5f5;
+    font-size: 0.85rem;
+    /* Reducción de fuente general */
+}
+
+
+/* Card principal */
+.principal-card {
+    background-color: white;
+    border: 0.3rem solid #dcdcdc;
+    border-radius: 0.5rem;
+    padding: 1rem 1rem 1rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+/* Cabecera de la card */
+.principal-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Imagen del perfil */
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Nombre del mentor */
+.principal-name {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+/* Separador */
+.dash {
+    font-size: 1rem;
+    color: #888;
+}
+
+/* Carrera */
+.principal-career {
+    color: #00aaff;
+    font-weight: 500;
+    margin-right: auto;
+    font-size: 0.85rem;
+}
+
+/* Botón Unirse */
+.btn-unirse {
+    background-color: #003A6D;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Icono lateral */
+.side-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* Texto descriptivo */
+.principal-description p {
+    margin: 0.2rem 0;
+    line-height: 1.4;
+    font-size: 0.85rem;
+}
+
+/* Imagen inferior */
+.principal-image img {
+    width: 100%;
+    max-height: 380px;
+    /* Puedes ajustar esta altura a tu gusto */
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    object-fit: cover;
+}
+
+
+
+
+
+/*SECCION RANKING*/
+/* Contenedor general */
+.ranking-wrapper {
+    background-color: white;
+    padding: 2rem;
+}
+
+.ranking-section {
+    margin-top: 1rem;
+}
+
+/* Caja azul */
+.ranking-box {
+    background-color: #003A6D;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Encabezado */
+.ranking-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #003A6D;
+    padding-bottom: 2rem;
+    /* Aumenta este valor según el espacio que quieras */
+}
+
+.ranking-label {
+    margin-right: 0.5rem;
+    /* separa un poco del desplegable */
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: black;
+}
+
+/* Imagen inicial */
+.ranking-icon {
+    width: 11rem;
+    height: 2rem;
+    margin-left: 3rem;
+    /* 3 rem desde la izquierda */
+    margin-top: 2rem;
+    /* 2 rem desde arriba */
+}
+
+/* Título centrado */
+.ranking-title {
+    font-size: 1.6rem !important;
+    text-align: center;
+    color: white;
+}
+
+/* Tarjetas de campeones */
+.champion-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.champion-card {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 200px;
+    text-align: center;
+}
+
+.champion-card h3 {
+    margin-top: 0;
+}
+
+.champion-img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 1rem 0;
+}
+
+.champion-nombre {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.champion-ranking {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Ranking Controls (dropdown) */
+.ranking-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0 1rem;
+}
+
+.ranking-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.ranking-select {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Tarjetas de ranking */
+.ranking-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.ranking-card {
+    padding: 0 1rem;
+    border: 0.1rem solid rgb(157, 157, 157);
+    /* grosor del borde, tipo y color */
+    border-radius: 1rem;
+    width: calc(50% - 1rem);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.ranking-card2 {
+    padding: 0 1rem;
+    border: 0.1rem solid rgb(157, 157, 157);
+    /* grosor del borde, tipo y color */
+    border-radius: 1rem;
+    width: calc(50% - 1rem);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.champion-img2 {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 1rem 0;
+    padding: 0.3rem;
+}
+
+
+.champion-titulo2 {
+    font-size: 0.9rem;
+    color: rgb(55, 188, 188);
+    font-weight: 800;
+
+}
+
+.champion-nombre2 {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.champion-ranking2 {
+    font-size: 0.8rem;
+    color: #ffffff;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+
+.oro {
+    background-color: #FFD700;
+    /* dorado */
+    border-radius: 1rem;
+
+}
+
+.plata {
+    background-color: #C0C0C0;
+    /* plateado */
+    border-radius: 1rem;
+}
+
+.cobre {
+    background-color: #CD7F32;
+    /* cobrizo */
+    border-radius: 1rem;
+}
+
+
+.chamoro {
+    background-color: #FFD700;
+    /* dorado */
+    border-radius: 50%;
+}
+
+.champlata {
+    background-color: #C0C0C0;
+    /* plateado */
+    border-radius: 50%;
+}
+
+.chamcobre {
+    background-color: #CD7F32;
+    /* cobrizo */
+    border-radius: 50%;
+}
+
+
+
+
+
+.card-header {
+    display: flex;
+    align-items: center;
+}
+
+.card-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.card-info h3 {
+    font-size: 1rem;
+    margin-left: 1rem;
+}
+
+.card-info .especialidad {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: rgb(55, 188, 188);
+    font-weight: 600;
+}
+
+.rank-p {
+    font-weight: 600;
+    padding: 1rem 0rem 0rem 0rem;
+}
+
+.ranking-position.oro {
+    font-weight: bold;
+    font-size: 0.75rem;
+    background-color: rgb(242, 208, 40);
+    border-radius: 5rem 5rem 5rem 5rem;
+    /* arriba derecha, abajo derecha, abajo izquierda, arriba izquierda */
+    padding: 0.5rem;
+    display: inline-block;
+    color: white;
+}
+
+.ranking-position.plata {
+    font-weight: bold;
+    font-size: 0.75rem;
+    background-color: rgb(161, 159, 146);
+    border-radius: 5rem 5rem 5rem 5rem;
+    /* arriba derecha, abajo derecha, abajo izquierda, arriba izquierda */
+    padding: 0.5rem;
+    display: inline-block;
+    color: white;
+}
+
+.ranking-position.cobre {
+    font-weight: bold;
+    font-size: 0.75rem;
+    background-color: rgb(232, 134, 37);
+    border-radius: 5rem 5rem 5rem 5rem;
+    /* arriba derecha, abajo derecha, abajo izquierda, arriba izquierda */
+    padding: 0.5rem;
+    display: inline-block;
+    color: white;
+}
+
+
+
+
+.stars {
+    display: flex;
+    gap: 0.2rem;
+    font-size: 1.9rem;
+}
+
+.star {
+    color: black;
+}
+
+.star.filled {
+    color: gold;
+}
+
+
+
+
+/*SECCION MENTORES-AGENDA*/
+
+.section-clasespopular {
+    background-color: white;
+    height: 85vh;
+    border-radius: 1rem;
+}
+
+.mentores-titulo {
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #003A6D;
+}
+
+.mentores-volver {
+    background-color: #003A6D;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin: 1rem 2rem;
+    /* <- esto centra horizontalmente */
+}
+
+.mentores-volver:hover {
+    background-color: #1565c0;
+    /* Azul más oscuro en hover */
+    transform: scale(1.03);
+    /* Ligero aumento al pasar el mouse */
+}
+
+.mentores-volver:active {
+    transform: scale(0.98);
+    background-color: #0d47a1;
+}
+
+#agenda {
+    background-color: #ffffff;
+    padding: 30px;
+    margin-top: 0.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 85vh;
+}
+
+#agenda h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #003A6D;
+}
+
+.agenda-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.agenda-form label {
+    color: #003A6D;
+    font-weight: 600;
+}
+
+.agenda-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.agenda-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.agenda-form button {
+    background-color: #003A6D;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.agenda-form button:hover {
+    background-color: #0056b3;
+}
+
+
+.btn-retroceder {
+    background-color: #003A6D;
+    color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+
+
+.mentor-info {
+    flex-shrink: 0;
+    min-width: 350px;
+    padding: 3rem 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra horizontalmente */
+    justify-content: center;
+    /* Centra verticalmente si hay espacio */
+}
+
+.mentor-imagen-container {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.mentor-imagen {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.mentor-horarios {
+    width: 100%;
+    text-align: center;
+}
+
+/*SECCION DE CLASES ENTERAR */
+
+/*SECCION CLASES*/
+
+.clase-card {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 2rem 1rem;
+    background: #f9f9f9;
+}
+
+#reunion {
+    background: #3186c7;
+    padding: 2rem;
+}
+
+
+
+.section-clasesenteras {
+    background-color: white;
+    height: auto;
+    padding-top: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.section-clasesenteras h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #003A6D;
+}
+
+.claseshay{
+    text-align: center;
+    padding: 1rem;
+    font-weight: 600;
+    color: #003A6D;
+}
+
+
+
+
+/* Estilo para el contenedor del filtro */
+.filtro-mentor-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Etiqueta del filtro */
+.filtro-mentor-container label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #444;
+}
+
+/* Select del filtro */
+#filtro-mentor {
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+#filtro-mentor:hover,
+#filtro-mentor:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.clasesfiltro {
+    padding-left: 1rem;
+}
+
+
+
+
+/* Opcional: estilizar el botón si está presente */
+
+/* Opcional: estilizar el botón si está presente */
+.clase-card button {
+    background-color: #0056b3;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clase-card button:hover {
+    background-color: #77cee9;
+}
+
+
+
+
+
+
+
+
+
+
+/*SECCION MENTORES*/
+
+.hidden {
+    display: none !important;
+}
+
+.curso-card.hidden {
+    display: none !important;
+}
+
+.mentores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Siempre 3 por fila */
+    gap: 1.5rem;
+    justify-items: start;
+    /* Alinea los elementos a la izquierda si hay menos */
+    padding: 0.5rem 2rem;
+}
+
+.mentor-card {
+    background-color: #106bbc;
+    border-radius: 0.8rem;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 230px;
+    /* Tamaño consistente */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mentor-card img {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.8rem;
+}
+
+.mentor-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: #ffffff;
+}
+
+.mentor-card p {
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+
+.cursos-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+    margin-bottom: 4rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cursos-banner {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 0.7rem;
+    margin-bottom: 2rem;
+}
+
+.selectorcursos{
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.cursos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.cursos-titulo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    font-family: 'TT Chocolates Trl', sans-serif;
+    color: #003A6D;
+}
+
+.curso-select {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    font-size: 1rem;
+    color: #003A6D;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.curso-select:hover {
+    border-color: #007bff;
+    background-color: #e9f3ff;
+}
+
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Fuerza 3 columnas */
+    gap: 1.5rem;
+    justify-items: center;
+}
+
+.curso-card {
+    width: 100%;
+    max-width: 250px;
+    /* Tamaño fijo máximo por tarjeta */
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 0.7rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.curso-card:hover {
+    transform: scale(1.03);
+}
+
+.curso-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.curso-titulo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 58, 109, 0.8);
+    color: white;
+    font-weight: bold;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+
+
+
+/* SECCION DE CALENDARIO */
+.section {
+    display: none;
+}
+
+.section-calendariotodo {
+    background-color: white;
+    padding: 1rem;
+    /* opcional: agrega un poco de espacio interior */
+    border-radius: 8px;
+    /* opcional: bordes redondeados */
+    margin-top: 0.5rem;
+}
+
+.section-calendariotodo h2 {
+    text-align: center;
+    color: #003A6D;
+    /* azul (puedes cambiarlo si deseas otro tono) */
+    margin-bottom: 1rem;
+}
+
+#calendar-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+}
+
+#calendar-controls button {
+    padding: 6px 12px;
+    background-color: #003A6D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#calendar-controls button:hover {
+    background-color: #003A6D;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.day {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+    min-height: 70px;
+    border: 1px solid black;
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+}
+
+.day-header {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.session {
+    background-color: rgb(122, 204, 234);
+    /* celeste */
+    color: black;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+
+.tooltip {
+    display: none;
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 9999;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/* Flechita */
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.day:hover .tooltip {
+    display: block;
+}
+
+
+
+/*SECCION DE MENTORES GESTION DE HORARIOS*/
+.seccion-agendar {
+    background-color: white;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.seccion-agendar h2.titulo-horarios {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.seccion-agendar form>div {
+    margin-bottom: 1rem;
+}
+
+.seccion-agendar label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #444;
+}
+
+.seccion-agendar input,
+.seccion-agendar select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.seccion-agendar button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.seccion-agendar button:hover {
+    background-color: #2980b9;
+}
+
+
+
+
+/*SECCION DE TOTAL DE HORARIOS DE MENTORES*/
+.seccion-total-horarios {
+    background-color: white;
+    padding: 2rem 0.5rem;
+    border-radius: 1rem;
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+.contenedor-horarios-creados table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contenedor-horarios-creados th,
+.contenedor-horarios-creados td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.oculto {
+    display: none;
+}
+
+
+
+
+/*SECCION DE REUNIONES DE WEBSRIO*/
+.meeting-setup {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.meeting-setup h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: #f8f9fa;
+    color: #333;
+    border: 2px solid #e1e5e9;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+}
+
+#meet {
+    width: 100%;
+    height: 600px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
+}
+
+.meeting-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1rem;
+    max-width: 95%;
+    width: 100%;
+}
+
+.meeting-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.participants-info {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.room-code {
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    border: 2px solid #e1e5e9;
+}
+
+
+
+/*SECCION DE SOLICITUDES*/
+#solicitudes {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+#form-solicitud {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#form-solicitud select,
+#form-solicitud textarea,
+#form-solicitud button {
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#form-solicitud button {
+    background-color: #003A6D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#form-solicitud button:hover {
+    background-color: #003A6D;
+}
+
+
+
+
+
+/* Estilo para la sección de Solicitudes */
+#solicitudes {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+#solicitudes label{
+    color: #003A6D;
+    font-weight: 600;
+}
+
+
+/* Estilo para la tabla de solicitudes */
+#tabla-solicitudes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-solicitudes th, #tabla-solicitudes td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-solicitudes th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+/* Botones si se agregan en el futuro */
+#tabla-solicitudes button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-solicitudes button:hover {
+    background-color: #0056b3;
+}
+
+#tabla-solicitudes button[style*="crimson"] {
+    background-color: crimson;
+}
+
+#tabla-solicitudes button[style*="crimson"]:hover {
+    background-color: darkred;
+}
+
+.solititulo{
+    text-align: center;
+    color: #003A6D;
+}
+
+
+
+
+/* Fondo general del modal (puedes agregarlo si quieres opacar el fondo) */
+#modal-feedback::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos del contenedor del modal */
+#modal-feedback {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    font-family: Arial, sans-serif;
+}
+
+/* Título del modal */
+#titulo-sesion-feedback {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Contenedor de estrellas (puedes agregar estilos según tu sistema de estrellas) */
+#estrellas {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #FFD700; /* color dorado */
+    cursor: pointer;
+}
+
+/* Textarea para comentarios */
+#comentario {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.75rem;
+    resize: none;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+/* Botón de enviar */
+#modal-feedback button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+#modal-feedback button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+.rightbar {
+    width: 150px;
+    height: calc(100vh - 3rem - 4rem); /* Altura limitada del aside */
+    overflow-y: auto;                      /* Scroll solo vertical */
+    overflow-x: hidden;                    /* Evita desborde horizontal */
+    scrollbar-width: none;                /* Firefox */
+    -ms-overflow-style: none;             /* IE/Edge */
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+    border-left: 1px solid #ccc;
+}
+
+/* Oculta la barra en Chrome/Safari */
+.rightbar::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.rightbar h4 {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#contenedor-publicidad a {
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#contenedor-publicidad img {
+    width: 100%;               /* Ocupa todo el ancho */
+    height: auto;              /* Altura natural, puede ser grande */
+    object-fit: contain;       /* Quepan sin recorte */
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+#contenedor-publicidad img:hover {
+    transform: scale(1.02);
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .meeting-setup {
+        padding: 1.5rem;
+    }
+
+    #meet {
+        height: 400px;
+    }
+}
+
+
+/* ===== MEDIA QUERIES ===== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar,
+    .rightbar {
+        display: none;
+    }
+
+    .sidebar.active,
+    .rightbar.active {
+        display: block;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    main {
+        width: 100%;
+    }
+
+    .username {
+        display: none;
+    }
+
+    .logo-img {
+        display: none;
+    }
+}

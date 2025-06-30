@@ -1,0 +1,1103 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.menu-item {
+    background: none;
+    border: none;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background-color: #34495e;
+    font-weight: bold;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de la tabla de usuarios */
+/* Estilo para la sección de Usuarios */
+#usuarios {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.usuariostitulo {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+#tabla-usuarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-usuarios th,
+#tabla-usuarios td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-usuarios th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-usuarios img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+#tabla-usuarios button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-usuarios button:hover {
+    background-color: #0056b3;
+}
+
+#tabla-usuarios button[style*="crimson"] {
+    background-color: crimson;
+}
+
+#tabla-usuarios button[style*="crimson"]:hover {
+    background-color: darkred;
+}
+
+/* Modal general */
+#modal-editar.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    z-index: 1000;
+    width: 100%;
+    max-width: 500px;
+    font-family: "Segoe UI", sans-serif;
+    animation: aparecerModal 0.3s ease-out;
+}
+
+/* Animación */
+@keyframes aparecerModal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Título */
+#modal-editar h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #003A6D;
+}
+
+/* Etiquetas */
+#modal-editar label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Campos de entrada */
+.input-box {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.input-box:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Contenedor de botones */
+.modal-botones {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* Botón guardar */
+.btn-guardar {
+    background-color: #003A6D;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-guardar:hover {
+    background-color: #003A6D;
+}
+
+/* Botón cancelar */
+.btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancelar:hover {
+    background-color: #5a6268;
+}
+
+#tabla-usuarios th:first-child,
+#tabla-usuarios td:first-child {
+    display: none;
+}
+
+/* Estilo para modal-agregar (idéntico al modal-editar) */
+/* Modal Agregar (misma estructura que Editar) */
+#modal-agregar.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    z-index: 1000;
+    width: 100%;
+    max-width: 500px;
+    font-family: "Segoe UI", sans-serif;
+    animation: aparecerModal 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Título más pequeño */
+#modal-agregar h3.titulo-modal {
+    font-size: 1.3rem;
+    color: #003A6D;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+/* Etiquetas */
+#modal-agregar label {
+    align-self: flex-start;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #444;
+    width: 100%;
+}
+
+
+
+
+
+
+/* Estilo para la sección de Cursos */
+#cursos {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.cursostitulos {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+
+#tabla-cursos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-cursos th,
+#tabla-cursos td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-cursos th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-cursos img {
+    border-radius: 8px;
+    width: 60px;
+    height: auto;
+}
+
+#tabla-cursos button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-cursos button:hover {
+    background-color: #0056b3;
+}
+
+#tabla-cursos button[style*="crimson"] {
+    background-color: crimson;
+}
+
+#tabla-cursos button[style*="crimson"]:hover {
+    background-color: darkred;
+}
+
+
+
+/* Modal de cursos (editar y agregar) */
+#modal-editar-curso.modal,
+#modal-agregar-curso.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    z-index: 1000;
+    width: 100%;
+    max-width: 500px;
+    font-family: "Segoe UI", sans-serif;
+    animation: aparecerModal 0.3s ease-out;
+}
+
+/* Animación */
+@keyframes aparecerModal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Título */
+#modal-editar-curso h3,
+#modal-agregar-curso h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #003A6D;
+}
+
+/* Etiquetas */
+#modal-editar-curso label,
+#modal-agregar-curso label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Campos de entrada */
+#modal-editar-curso input[type="text"],
+#modal-agregar-curso input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+#modal-editar-curso input[type="text"]:focus,
+#modal-agregar-curso input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Contenedor de botones */
+#modal-editar-curso .modal-botones,
+#modal-agregar-curso .modal-botones {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* Botón guardar */
+#modal-editar-curso .btn-guardar,
+#modal-agregar-curso .btn-guardar {
+    background-color: #28a745;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#modal-editar-curso .btn-guardar:hover,
+#modal-agregar-curso .btn-guardar:hover {
+    background-color: #218838;
+}
+
+/* Botón cancelar */
+#modal-editar-curso .btn-cancelar,
+#modal-agregar-curso .btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#modal-editar-curso .btn-cancelar:hover,
+#modal-agregar-curso .btn-cancelar:hover {
+    background-color: #5a6268;
+}
+
+#tabla-cursos th:first-child,
+#tabla-cursos td:first-child {
+    display: none;
+}
+
+/* Imagen previa centrada en los modals */
+#modal-editar-curso img,
+#modal-agregar-curso img {
+    display: block;
+    margin: 0 auto 10px auto;
+    max-width: 100px;
+    border-radius: 8px;
+}
+
+/* Input file centrado debajo de la imagen */
+#modal-editar-curso input[type="file"],
+#modal-agregar-curso input[type="file"] {
+    display: block;
+    margin: 0 auto 1rem auto;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para la sección de Sesiones */
+#sesiones {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.sesionestotales {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+#tabla-sesiones {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-sesiones th,
+#tabla-sesiones td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-sesiones th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-sesiones button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-sesiones button:hover {
+    background-color: #0056b3;
+}
+
+#tabla-sesiones button[style*="crimson"] {
+    background-color: crimson;
+}
+
+#tabla-sesiones button[style*="crimson"]:hover {
+    background-color: darkred;
+}
+
+#tabla-sesiones th:first-child,
+#tabla-sesiones td:first-child {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para la sección de Estudiantes */
+#estudiantes {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.estudiantestotaless {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+#tabla-estudiantes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-estudiantes th,
+#tabla-estudiantes td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-estudiantes th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-estudiantes img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+#tabla-estudiantes button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-estudiantes button:hover {
+    background-color: #0056b3;
+}
+
+#tabla-estudiantes button[style*="crimson"] {
+    background-color: crimson;
+}
+
+#tabla-estudiantes button[style*="crimson"]:hover {
+    background-color: darkred;
+}
+
+#tabla-estudiantes th:first-child,
+#tabla-estudiantes td:first-child {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para la sección de Mentores */
+#mentores {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.mentorestotaless {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+
+#tabla-mentores {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-mentores th,
+#tabla-mentores td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-mentores th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-mentores img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+#tabla-mentores button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-mentores button:hover {
+    background-color: #0056b3;
+}
+
+#tabla-mentores button[style*="crimson"] {
+    background-color: crimson;
+}
+
+#tabla-mentores button[style*="crimson"]:hover {
+    background-color: darkred;
+}
+
+#tabla-mentores th:first-child,
+#tabla-mentores td:first-child {
+    display: none;
+}
+
+
+
+
+/* Estilo para la sección de Solicitudes */
+/* Estilo para la sección de Solicitudes */
+#solicitudes {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.solicitudtitulos {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+#tabla-solicitudes-admin {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-solicitudes-admin th,
+#tabla-solicitudes-admin td {
+    border: 1px solid #cccccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-solicitudes-admin th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-solicitudes-admin button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+/* Botón aceptar */
+#tabla-solicitudes-admin .btn-aceptar {
+    background-color: green;
+}
+
+#tabla-solicitudes-admin .btn-aceptar:hover {
+    background-color: darkgreen;
+}
+
+/* Botón denegar */
+#tabla-solicitudes-admin .btn-denegar {
+    background-color: crimson;
+}
+
+#tabla-solicitudes-admin .btn-denegar:hover {
+    background-color: darkred;
+}
+
+#tabla-solicitudes-admin th:first-child,
+#tabla-solicitudes-admin td:first-child {
+    display: none;
+}
+
+
+
+#publicidad {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.publicidadtitulo {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+#tabla-publicidad {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-publicidad th,
+#tabla-publicidad td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+}
+
+#tabla-publicidad th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-publicidad img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+#tabla-publicidad button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-publicidad button:hover {
+    background-color: #0056b3;
+}
+
+
+
+#novedades {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #003A6D;
+    margin-top: 20px;
+}
+
+.novedadestitulo {
+    text-align: center;
+    color: #003A6D;
+    font-size: 1.8rem;
+}
+
+#tabla-novedades {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#tabla-novedades th,
+#tabla-novedades td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#tabla-novedades th {
+    background-color: #003A6D;
+    color: white;
+    font-weight: bold;
+}
+
+#tabla-novedades img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+#tabla-novedades button {
+    padding: 6px 10px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#tabla-novedades button:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Ocultar la columna ID en la tabla de Publicidad */
+#tabla-publicidad th:nth-child(1),
+#tabla-publicidad td:nth-child(1) {
+    display: none;
+}
+
+/* Ocultar la columna ID en la tabla de Novedades */
+#tabla-novedades th:nth-child(1),
+#tabla-novedades td:nth-child(1) {
+    display: none;
+}
+
+
+
+/* ===== Modal Publicidad ===== */
+#modal-publicidad {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    z-index: 1000;
+    width: 100%;
+    max-width: 500px;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#titulo-modal-publicidad {
+    font-size: 1.5rem;
+    color: #003A6D;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#form-publicidad label {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    display: block;
+    color: #444;
+}
+
+#form-publicidad input[type="url"],
+#form-publicidad input[type="file"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+#preview-publicidad {
+    display: block;
+    margin: 10px auto;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+#botones-modal-publicidad {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+#btn-guardar-publicidad,
+#btn-cancelar-publicidad {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+}
+
+#btn-guardar-publicidad {
+    background-color: #003A6D;
+}
+
+#btn-cancelar-publicidad {
+    background-color: #6c757d;
+}
+
+/* ===== Modal Novedad ===== */
+#modal-novedad {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    z-index: 1000;
+    width: 100%;
+    max-width: 700px;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#titulo-modal-novedad {
+    font-size: 1.5rem;
+    color: #003A6D;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#form-novedad label {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    display: block;
+    color: #444;
+}
+
+#form-novedad input[type="text"],
+#form-novedad textarea,
+#form-novedad input[type="file"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Distribución en filas dobles */
+.fila-doble-novedad {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.fila-doble-novedad .campo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Imágenes */
+#preview-novedad-autor,
+#preview-novedad-img {
+    display: block;
+    margin: 10px auto;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Botones */
+#botones-modal-novedad {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+#btn-guardar-novedad,
+#btn-cancelar-novedad {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+}
+
+#btn-guardar-novedad {
+    background-color: #003A6D;
+}
+
+#btn-cancelar-novedad {
+    background-color: #6c757d;
+}

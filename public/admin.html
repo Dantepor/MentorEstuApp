@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Admin</h2>
+        <button class="menu-item active" onclick="mostrarSeccion('usuarios')">Usuarios</button>
+        <button class="menu-item" onclick="mostrarSeccion('cursos')">Cursos</button>
+        <button class="menu-item" onclick="mostrarSeccion('solicitudes')">Solicitudes</button>
+        <button class="menu-item" onclick="mostrarSeccion('sesiones')">Sesiones</button>
+        <button class="menu-item" onclick="mostrarSeccion('mentores')">Mentores</button>
+        <button class="menu-item" onclick="mostrarSeccion('estudiantes')">Estudiantes</button>
+        <button class="menu-item" onclick="mostrarSeccion('publicidad')">Publicidad</button>
+        <button class="menu-item" onclick="mostrarSeccion('novedades')">Novedades</button>
+    </div>
+
+    <div class="main-content">
+        <div id="usuarios" class="section active">
+            <h3 class="usuariostitulo">Total de Usuarios</h3>
+            <!-- Filtros -->
+            <div style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                <input type="text" id="busqueda-usuarios" name="no-autofill" placeholder="🔍 Buscar por nombre"
+                    autocomplete="off" readonly
+                    style="padding: 0.5rem; flex: 1; border: 1px solid #ccc; border-radius: 6px;" />
+
+                <select id="filtro-rol" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Rol</option>
+                </select>
+
+                <select id="filtro-correo" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Correo</option>
+                </select>
+
+                <select id="filtro-fecha" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Fecha Registro</option>
+                </select>
+            </div>
+            <button onclick="abrirModalAgregar()" class="btn-guardar" style="margin-bottom: 10px;">
+                ➕ Agregar Usuario
+            </button>
+            <table id="tabla-usuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Fecha Registro</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+
+        <!-- Sección de cursos -->
+        <div id="cursos" class="section">
+            <h3 class="cursostitulos">Total de Cursos</h3>
+            <!-- Filtros -->
+            <div style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                <input type="text" id="busqueda-cursos" placeholder="🔍 Buscar curso"
+                    style="padding: 0.5rem; flex: 1; border: 1px solid #ccc; border-radius: 6px;" />
+
+                <select id="filtro-cursos" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por nombre</option>
+                </select>
+            </div>
+
+            <!-- Botón para abrir el modal -->
+            <button onclick="abrirModalAgregarCurso()"
+                style="margin-bottom: 15px; background: #003A6D; color: white; padding: 0.8rem 1rem; border: none; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                ➕ Agregar Curso
+            </button>
+
+            <!-- Tabla de cursos -->
+            <table id="tabla-cursos">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Curso / Especialidad</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+
+
+        <div id="sesiones" class="section">
+            <h3 class="sesionestotales">Total de Sesiones</h3>
+
+            <!-- Filtros -->
+            <div style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                <input type="text" id="busqueda-sesiones" placeholder="🔍 Buscar por mentor o estudiante"
+                    style="padding: 0.5rem; flex: 1; border: 1px solid #ccc; border-radius: 6px;" />
+
+                <select id="filtro-mentor" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por mentor</option>
+                </select>
+
+                <select id="filtro-estudiante" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por estudiante</option>
+                </select>
+
+                <select id="filtro-fecha" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por fecha</option>
+                </select>
+
+                <select id="filtro-estado" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por estado</option>
+                </select>
+            </div>
+
+            <!-- Tabla -->
+            <table id="tabla-sesiones">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Mentor</th>
+                        <th>Estudiante</th>
+                        <th>Fecha</th>
+                        <th>Hora Inicio</th>
+                        <th>Hora Final</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+        <div id="estudiantes" class="section">
+            <h3 class="estudiantestotaless">Total de Estudiantes</h3>
+
+            <!-- 🔍 Filtros debajo del título -->
+            <div style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                <input type="text" id="busqueda-estudiantes" placeholder="🔍 Buscar por nombre o correo"
+                    style="padding: 0.5rem; flex: 1; border: 1px solid #ccc; border-radius: 6px;" />
+
+                <select id="filtro-nombre" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por nombre</option>
+                </select>
+
+                <select id="filtro-correo" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por correo</option>
+                </select>
+
+                <select id="filtro-fecha" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por fecha</option>
+                </select>
+            </div>
+
+            <!-- Tabla de estudiantes -->
+            <table id="tabla-estudiantes">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Fecha Registro</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+
+        <div id="mentores" class="section">
+            <h3 class="mentorestotaless">Total de Mentores</h3>
+
+            <!-- Filtros de búsqueda -->
+            <div style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                <input type="text" id="busqueda-mentores" placeholder="🔍 Buscar por nombre o correo"
+                    style="padding: 0.5rem; flex: 1; border: 1px solid #ccc; border-radius: 6px;" />
+
+                <select id="filtro-nombre-mentor" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por nombre</option>
+                </select>
+
+                <select id="filtro-correo-mentor" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por correo</option>
+                </select>
+
+                <select id="filtro-fecha-mentor" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Filtrar por fecha</option>
+                </select>
+            </div>
+
+            <!-- Tabla -->
+            <table id="tabla-mentores">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Fecha Registro</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+
+        <div id="solicitudes" class="section">
+            <h3 class="solicitudtitulos">Total de Solicitudes</h3>
+            <!-- Filtros de solicitudes -->
+            <div style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                <input type="text" id="busqueda-solicitudes" placeholder="🔍 Buscar por texto"
+                    style="padding: 0.5rem; flex: 1; border: 1px solid #ccc; border-radius: 6px;" />
+
+                <select id="filtro-usuario" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Usuario</option>
+                </select>
+
+                <select id="filtro-motivo" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Motivo</option>
+                </select>
+
+                <select id="filtro-resultado" style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px;">
+                    <option value="">Resultado</option>
+                    <option value="aceptado">Aceptado</option>
+                    <option value="denegado">Denegado</option>
+                    <option value="pendiente">Pendiente</option>
+                </select>
+            </div>
+            <table id="tabla-solicitudes-admin" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <thead>
+                    <tr style="background-color: #007BFF; color: white;">
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Motivo</th>
+                        <th>Pedido</th>
+                        <th>Resultado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+        <div id="publicidad" class="section">
+            <h3 class="publicidadtitulo">Publicidades Totales</h3>
+
+            <button onclick="abrirModalAgregarPublicidad()" class="btn-guardar" style="margin-bottom: 10px;">
+                ➕ Agregar Publicidad
+            </button>
+
+            <table id="tabla-publicidad">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagen</th>
+                        <th>Link</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+        <div id="novedades" class="section">
+            <h3 class="novedadestitulo">Novedades Totales</h3>
+            <div style="margin-bottom: 15px;">
+                <input type="text" id="filtro-novedades-general" placeholder="Buscar autor, carrera o título..."
+                    class="input-box" style="width: 100%; margin-bottom: 10px;">
+
+                <div style="display: flex; gap: 10px;">
+                    <select id="filtro-autor" class="input-box" style="flex: 1;">
+                        <option value="">Filtrar por autor</option>
+                    </select>
+                    <select id="filtro-carrera" class="input-box" style="flex: 1;">
+                        <option value="">Filtrar por carrera</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="abrirModalAgregarNovedad()" class="btn-guardar" style="margin-bottom: 10px;">
+                ➕ Agregar Novedad
+            </button>
+
+            <table id="tabla-novedades">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Autor</th>
+                        <th>Carrera</th>
+                        <th>Imagen Autor</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>Imagen Contenido</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Sección de Uusarios Modal de editar -->
+    <div id="modal-editar" class="modal" style="display: none;">
+        <h3>Editar Usuario</h3>
+        <input type="hidden" id="edit-id">
+
+        <label>Nombre:</label>
+        <input type="text" id="edit-nombre" class="input-box">
+
+        <label>Correo:</label>
+        <input type="email" id="edit-correo" class="input-box">
+
+        <label>Nueva contraseña (opcional):</label>
+        <input type="password" id="edit-password" placeholder="••••••••" class="input-box">
+
+        <label>Rol:</label>
+        <select id="edit-rol" class="input-box"></select>
+
+        <label>Imagen actual:</label>
+        <img id="edit-imagen-preview" src="" alt="Imagen del usuario"
+            style="display: block; margin: 10px auto; width: 80px; height: 80px; border-radius: 50%;">
+
+        <label>Subir nueva imagen:</label>
+        <input type="file" id="edit-imagen-file" accept="image/*" class="input-box">
+
+        <div class="modal-botones">
+            <button onclick="guardarCambios()" class="btn-guardar">Guardar</button>
+            <button onclick="cerrarModalEditar()" class="btn-cancelar">Cancelar</button>
+        </div>
+    </div>
+
+
+    <!-- Sección de Uusarios Modal de agregar -->
+    <!-- Modal Agregar Usuario -->
+    <div id="modal-agregar" class="modal" style="display: none;">
+        <h3 class="titulo-modal">Agregar Usuario</h3>
+        <form id="form-agregar-usuario" enctype="multipart/form-data">
+            <label>Nombre:</label>
+            <input type="text" name="nombre_completo" class="input-box" required>
+
+            <label>Correo:</label>
+            <input type="email" name="correo" class="input-box" required>
+
+            <label>Contraseña:</label>
+            <input type="password" name="password" class="input-box" required placeholder="••••••••">
+
+            <label>Rol:</label>
+            <select name="rol_id" class="input-box" id="agregar-rol" required></select>
+
+            <label>Imagen actual:</label>
+            <img id="add-imagen-preview" src="/img/basicperfil.png" alt="Imagen del usuario"
+                style="display: block; margin: 10px auto; width: 80px; height: 80px; border-radius: 50%;">
+
+            <label>Subir nueva imagen:</label>
+            <input type="file" name="imagen" accept="image/*" class="input-box" id="add-imagen-file">
+
+            <div class="modal-botones">
+                <button type="submit" class="btn-guardar">Agregar</button>
+                <button type="button" onclick="cerrarModalAgregar()" class="btn-cancelar">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+    <!-- Modal para editar curso -->
+    <div id="modal-editar-curso" class="modal" style="display: none;">
+        <h3>Editar Curso</h3>
+        <input type="hidden" id="curso-id">
+
+        <label>Nombre:</label>
+        <input type="text" id="curso-nombre" class="input-box">
+
+        <label>Imagen:</label>
+        <img id="preview-editar-curso" src="/img/basicperfil.png" alt="Vista previa">
+        <input type="file" id="curso-imagen-file" accept="image/*"
+            onchange="previsualizarImagenCurso('curso-imagen-file', 'preview-editar-curso')" />
+
+        <div class="modal-botones">
+            <button class="btn-guardar" onclick="guardarCambiosCurso()">Guardar</button>
+            <button class="btn-cancelar" onclick="cerrarModalCurso()">Cancelar</button>
+        </div>
+    </div>
+
+
+    <!-- Modal para agregar curso -->
+    <div id="modal-agregar-curso" class="modal" style="display: none;">
+        <h3>Agregar Nuevo Curso</h3>
+
+        <label>Nombre:</label>
+        <input type="text" id="nuevo-curso-nombre" class="input-box">
+
+        <label>Imagen:</label>
+        <img id="preview-agregar-curso" src="/img/basicperfil.png" alt="Vista previa">
+        <input type="file" id="nuevo-curso-imagen-file" accept="image/*"
+            onchange="previsualizarImagenCurso('nuevo-curso-imagen-file', 'preview-agregar-curso')" />
+
+        <div class="modal-botones">
+            <button class="btn-guardar" onclick="guardarNuevoCurso()">Guardar</button>
+            <button class="btn-cancelar" onclick="cerrarModalAgregarCurso()">Cancelar</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal Publicidad -->
+    <div id="modal-publicidad" class="modal" style="display: none;">
+        <h3 class="titulo-modal">Agregar / Editar Publicidad</h3>
+        <form id="form-publicidad" enctype="multipart/form-data">
+            <label>Link de la publicidad:</label>
+            <input type="url" name="link_publi" id="input-publicidad-link" class="input-box" required>
+
+            <label>Imagen actual:</label>
+            <img id="preview-publicidad" src="/img/default-publicidad.png" alt="Publicidad"
+                style="display: block; margin: 10px auto; width: 100px; height: 100px; object-fit: cover; border-radius: 12px;">
+
+            <label>Subir nueva imagen:</label>
+            <input type="file" name="imagen_publi" id="input-publicidad-img" accept="image/*" class="input-box">
+
+            <div class="modal-botones">
+                <button type="submit" class="btn-guardar">Guardar</button>
+                <button type="button" onclick="cerrarModalPublicidad()" class="btn-cancelar">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Modal Novedad -->
+    <!-- Modal Novedad -->
+    <div id="modal-novedad" class="modal" style="display: none;">
+        <h3 class="titulo-modal">Agregar / Editar Novedad</h3>
+        <form id="form-novedad" enctype="multipart/form-data">
+
+            <!-- Fila: Nombre y Carrera -->
+            <div class="fila-doble-novedad">
+                <div class="campo">
+                    <label>Nombre del autor:</label>
+                    <input type="text" name="nombre_autor" id="input-nombre-novedad" class="input-box" required>
+                </div>
+                <div class="campo">
+                    <label>Carrera:</label>
+                    <input type="text" name="carrera_autor" id="input-carrera-novedad" class="input-box" required>
+                </div>
+            </div>
+
+            <!-- Fila: Imagen Autor + File -->
+            <div class="fila-doble-novedad">
+                <div class="campo">
+                    <label>Imagen del autor:</label>
+                    <img id="preview-novedad-autor" src="/img/default-novedad.png" alt="Autor">
+                </div>
+                <div class="campo">
+                    <label>Subir nueva imagen del autor:</label>
+                    <input type="file" name="imagen_autor" id="input-novedad-img-autor" accept="image/*">
+                </div>
+            </div>
+
+            <!-- Fila: Título y Descripción -->
+            <div class="fila-doble-novedad">
+                <div class="campo">
+                    <label>Título de la novedad:</label>
+                    <input type="text" name="titulo" id="input-titulo-novedad" class="input-box" required>
+                </div>
+                <div class="campo">
+                    <label>Descripción:</label>
+                    <textarea name="descripcion" id="input-descripcion-novedad" class="input-box" rows="4"
+                        required></textarea>
+                </div>
+            </div>
+
+            <!-- Fila: Imagen contenido + file -->
+            <div class="fila-doble-novedad">
+                <div class="campo">
+                    <label>Imagen del contenido:</label>
+                    <img id="preview-novedad-img" src="/img/default-novedad.png" alt="Contenido">
+                </div>
+                <div class="campo">
+                    <label>Subir nueva imagen del contenido:</label>
+                    <input type="file" name="imagen_contenido" id="input-novedad-img" accept="image/*">
+                </div>
+            </div>
+
+            <div class="modal-botones">
+                <button type="submit" class="btn-guardar">Guardar</button>
+                <button type="button" onclick="cerrarModalNovedad()" class="btn-cancelar">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="/js/admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inicio MentorEstu</title>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins:wght@300&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="fonts/tt-chocolates.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/estilosinicio2.css" />
+</head>
+
+<body>
+    <!-- Header / Menú -->
+    <header class="menu">
+        <div class="header-left">
+            <button class="menu-toggle" id="menu-btn" type="button">☰</button>
+            <img src="img/logo.png" alt="Logo MentorEstu" class="logo-img" />
+        </div>
+        <div class="header-right">
+            <!-- 3 imágenes a la izquierda del avatar -->
+            <img src="img/calen.png" class="extra-img" alt="calendario">
+            <img src="img/noti.png" class="extra-img" alt="notificacion">
+            <img src="img/campana.png" class="extra-img" alt="campana">
+
+            <!-- Avatar con punto verde e info oculta -->
+            <div class="avatar-container">
+                <img src="ruta-a-avatar.jpg" alt="Avatar" class="avatar" id="avatarFoto" />
+                <span class="user_name" id="usuario"></span>
+                <div id="user-info-box">
+                    <img id="infoFoto" alt="Foto del usuario" width="150" />
+                    <p style="display: none;"><strong>ID:</strong> <span id="userId"></span></p>
+                    <p><strong>Nombre completo:</strong> <span id="userNombre"></span></p>
+                    <p><strong>Correo:</strong> <span id="userCorreo"></span></p>
+                    <p><strong>Rol:</strong> <span id="userRol"></span></p>
+                    <p><strong>Fecha de registro:</strong> <span id="userFecha"></span></p>
+                    <div class="user-info-actions">
+                        <button id="edit-button" type="button">Editar</button>
+                        <button id="close-info-button" type="button">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- SECCIÓN PRINCIPAL -->
+                <div class="seccion-principal">
+                    <ul class="menu">
+                        <li data-section="principal"><img src="img/casa.png" class="menu-icon" /> Principal</li>
+                        <li data-section="ranking"><img src="img/ranking.png" class="menu-icon" /> Ranking</li>
+                        <li data-section="clases"><img src="img/objetivo.png" class="menu-icon" /> Clases</li>
+                        <li data-section="calendario"><img src="img/calendario.png" class="menu-icon" /> Calendario</li>
+                        <li data-section="agendar"><img src="img/agendar.png" class="menu-icon" /> Agendar</li>
+                        <li data-section="total-horarios"><img src="img/horario.png" class="menu-icon" /> Total Horarios
+                        <li data-section="solicitudes"><img src="img/solicitud.png" class="menu-icon" /> Solicitudes
+                        </li>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- SECCIÓN CURSOS -->
+                <div class="seccion-cursos">
+                    <div class="titulo-cursos">
+                        <span>Cursos recientes</span>
+                        <img src="img/abajo.png" class="icono-cursos" />
+                    </div>
+                    <div class="unete-curso">
+                        <span>Proximamente..</span>
+                    </div>
+                </div>
+
+
+                <!-- SECCIÓN CONTACTOS -->
+                <div class="seccion-contactos">
+                    <div class="titulo-contactos">
+                        <span>Contactos</span>
+                        <img src="img/abajo.png" class="flecha-contacto" alt="flecha">
+                    </div>
+                    <div class="contacto">
+                        <span>Proximamente..</span>
+                    </div>
+                </div>
+
+
+                <!-- SECCIÓN COMUNIDADES -->
+                <div class="seccion-comunidades">
+                    <div class="titulo-comunidades">
+                        <span>Comunidades</span>
+                        <img src="img/abajo.png" class="flecha-comunidad" alt="flecha">
+                    </div>
+                    <div class="comunidad">
+                        <span>Proximamente..</span>
+                    </div>
+                </div>
+
+
+                <!-- SECCIÓN RECURSOS -->
+                <div class="seccion-recursos">
+                    <div class="titulo-recursos">
+                        <span>Recursos</span>
+                        <img src="img/abajo.png" class="flecha-recurso" alt="flecha">
+                    </div>
+                    <div class="recurso">
+                        <span>Proximamente..</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main id="main-content">
+            <!-- Sección PRINCIPAL -->
+            <section class="section active" id="principal">
+                <!-- Repetir este bloque 3 veces -->
+                <div class="principal-card">
+                    <div class="principal-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Mentor" class="profile-pic">
+                        <span class="principal-name">Lucía Fernández</span>
+                        <span class="dash">-</span>
+                        <span class="principal-career">Ingeniería de Sistemas</span>
+                        <button class="btn-unirse">Unirse</button>
+                        <img src="img/puntos.png" alt="Icono" class="side-icon">
+                    </div>
+                    <div class="principal-description">
+                        <p>¡Haz que tu dinero trabaje para ti!</p>
+                        <p>Curso gratuito de Administración Bancaria y Financiera ☐☐</p>
+                        <p>¿Te intriga saber cómo funcionan los bancos por dentro?</p>
+                        <p>¿Quieres aprender a manejar tus finanzas como un pro?</p>
+                        <p>¿Sueñas con detectar errores financieros como un/a auditor/a de élite?</p>
+                        <p><strong>¡Este curso es para ti!</strong></p>
+                    </div>
+                    <div class="principal-image">
+                        <img src="img/recurso1.png" alt="Curso financiero">
+                    </div>
+                </div>
+
+                <div class="principal-card">
+                    <div class="principal-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Mentor" class="profile-pic">
+                        <span class="principal-name">Lucía Fernández</span>
+                        <span class="dash">-</span>
+                        <span class="principal-career">Ingeniería de Sistemas</span>
+                        <button class="btn-unirse">Unirse</button>
+                        <img src="img/puntos.png" alt="Icono" class="side-icon">
+                    </div>
+                    <div class="principal-description">
+                        <p>¡Haz que tu dinero trabaje para ti!</p>
+                        <p>Curso gratuito de Administración Bancaria y Financiera ☐☐</p>
+                        <p>¿Te intriga saber cómo funcionan los bancos por dentro?</p>
+                        <p>¿Quieres aprender a manejar tus finanzas como un pro?</p>
+                        <p>¿Sueñas con detectar errores financieros como un/a auditor/a de élite?</p>
+                        <p><strong>¡Este curso es para ti!</strong></p>
+                    </div>
+                    <div class="principal-image">
+                        <img src="img/recurso1.png" alt="Curso financiero">
+                    </div>
+                </div>
+
+                <div class="principal-card">
+                    <div class="principal-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Mentor" class="profile-pic">
+                        <span class="principal-name">Lucía Fernández</span>
+                        <span class="dash">-</span>
+                        <span class="principal-career">Ingeniería de Sistemas</span>
+                        <button class="btn-unirse">Unirse</button>
+                        <img src="img/puntos.png" alt="Icono" class="side-icon">
+                    </div>
+                    <div class="principal-description">
+                        <p>¡Haz que tu dinero trabaje para ti!</p>
+                        <p>Curso gratuito de Administración Bancaria y Financiera ☐☐</p>
+                        <p>¿Te intriga saber cómo funcionan los bancos por dentro?</p>
+                        <p>¿Quieres aprender a manejar tus finanzas como un pro?</p>
+                        <p>¿Sueñas con detectar errores financieros como un/a auditor/a de élite?</p>
+                        <p><strong>¡Este curso es para ti!</strong></p>
+                    </div>
+                    <div class="principal-image">
+                        <img src="img/recurso1.png" alt="Curso financiero">
+                    </div>
+                </div>
+
+                <div class="principal-card">
+                    <div class="principal-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Mentor" class="profile-pic">
+                        <span class="principal-name">Lucía Fernández</span>
+                        <span class="dash">-</span>
+                        <span class="principal-career">Ingeniería de Sistemas</span>
+                        <button class="btn-unirse">Unirse</button>
+                        <img src="img/puntos.png" alt="Icono" class="side-icon">
+                    </div>
+                    <div class="principal-description">
+                        <p>¡Haz que tu dinero trabaje para ti!</p>
+                        <p>Curso gratuito de Administración Bancaria y Financiera ☐☐</p>
+                        <p>¿Te intriga saber cómo funcionan los bancos por dentro?</p>
+                        <p>¿Quieres aprender a manejar tus finanzas como un pro?</p>
+                        <p>¿Sueñas con detectar errores financieros como un/a auditor/a de élite?</p>
+                        <p><strong>¡Este curso es para ti!</strong></p>
+                    </div>
+                    <div class="principal-image">
+                        <img src="img/recurso1.png" alt="Curso financiero">
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Sección RANKING -->
+            <section id="ranking" class="ranking-section" style="display: none;">
+                <div class="ranking-wrapper">
+                    <div class="ranking-header">
+                        <img src="img/logo.png" alt="Icono ranking" class="ranking-icon" />
+                        <p class="ranking-title">CAMPEONES DEL RANKING</p>
+                        <!-- Contenedor para ranking de 3 campeones (top 3) -->
+                        <div class="champion-cards" id="rankingCards2"></div>
+                    </div>
+
+                    <div class="ranking-controls">
+                        <span class="ranking-label">Ranking</span>
+                        <select class="ranking-select" id="rankingSelect">
+                            <option value="maestro">Maestro</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="novato">Novato</option>
+                        </select>
+                    </div>
+
+                    <!-- Contenedor para ranking completo -->
+                    <div class="ranking-grid" id="rankingGrid"></div>
+                </div>
+            </section>
+
+
+
+
+
+            <!-- Sección PERFIL MENTOR-->
+            <section id="perfilMentor" class="section" style="display: none;">
+                <h2>Editar Perfil</h2>
+                <form id="formEditarPerfilMentor" enctype="multipart/form-data">
+                    <!-- Imagen -->
+                    <div class="foto-mentor-container">
+                        <img id="editFotoPreviewMentor" src="basicperfil.png" alt="Foto de perfil" />
+                        <input type="file" id="editImagenMentor" accept="image/*" />
+                    </div>
+
+                    <!-- Datos -->
+                    <label for="editNombreMentor">Nombre completo:</label>
+                    <input type="text" id="editNombreMentor" name="editNombreMentor" required>
+
+                    <label for="editCorreoMentor">Correo electrónico:</label>
+                    <input type="email" id="editCorreoMentor" name="editCorreoMentor" required>
+
+                    <!-- Especialidades -->
+                    <h3>Especialidades actuales</h3>
+                    <ul id="listaEspecialidadesMentor"></ul>
+
+                    <h3>Agregar nueva especialidad</h3>
+                    <select id="nuevaEspecialidad"></select>
+                    <button type="button" id="btnAgregarEspecialidad">Agregar</button>
+
+                    <!-- Botones -->
+                    <div class="botones-accion">
+                        <button type="submit">Guardar cambios</button>
+                        <button type="button" id="cancelarEditarMentor">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+
+            <!-- Sección POPULAR -->
+            <section class="section" id="popular">
+                <h2 id="mentores-title" style="display: none;">Mentores Destacados</h2>
+
+                <!-- Botón para volver a especialidades -->
+                <button id="btn-volver" style="display:none; margin-bottom: 10px;">Volver a especialidades</button>
+
+                <div class="mentores-grid" id="mentores-container">
+                    <!-- Aquí se insertarán las tarjetas de mentores -->
+                </div>
+
+                <!-- Contenedor blanco -->
+                <div class="cursos-container">
+                    <!-- Imagen superior -->
+                    <img src="img/NEGOCIOS-CERTUS-BLOG.jpg" alt="Banner Cursos" class="cursos-banner">
+
+                    <!-- Encabezado -->
+                    <div class="cursos-header">
+                        <h2 class="cursos-titulo">Cursos</h2>
+                        <select id="curso-filter">
+                            <option value="">Seleccione una especialidad</option>
+                        </select>
+                    </div>
+
+                    <!-- Cuadros de cursos -->
+                    <div class="cursos-grid" id="cursos-grid">
+                        <!-- Aquí se generarán los cuadros dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- Sección DOCENTE-AGENDA -->
+            <section id="agenda" class="section" style="display: none;">
+                <div class="mentor-info">
+                    <img id="mentor-imagen" src="" alt="Foto del mentor"
+                        style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 2px solid #ccc;">
+                    <div>
+                        <h2>Agendar Sesión con <span id="mentor-nombre"></span></h2>
+                        <!-- ESTE ID FUE CORREGIDO -->
+                        <div id="mentor-horarios"></div>
+                    </div>
+                </div>
+
+                <form id="form-agenda" class="agenda-form">
+                    <label for="dia">Día:</label>
+                    <input type="number" id="dia" name="dia" required min="1" max="31">
+
+                    <label for="mes">Mes:</label>
+                    <input type="number" id="mes" name="mes" required min="1" max="12">
+
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" name="hora" required>
+
+                    <button type="submit">Agendar</button>
+                </form>
+            </section>
+
+            <!-- Sección CALENDARIO -->
+            <section id="calendario" class="section section-calendariotodo">
+                <h2>Calendario de sesiones</h2>
+
+                <div id="calendar-controls">
+                    <button id="prev-month">« Anterior</button>
+                    <span id="calendar-month-year"></span>
+                    <button id="next-month">Siguiente »</button>
+                </div>
+
+                <div id="calendar"></div>
+            </section>
+
+
+            <!-- Sección GESTIONAR HORARIOS -->
+            <section id="agendar" class="seccion-oculta seccion-agendar" style="display: none;">
+                <h2 class="titulo-horarios">GESTIONAR HORARIOS</h2>
+
+                <form id="mentor-agendar-form">
+                    <div>
+                        <label for="mentor-nombre-input">Nombre:</label>
+                        <input type="text" id="mentor-nombre-input" readonly>
+                    </div>
+
+                    <div>
+                        <label for="mentor-especialidad">Especialidad:</label>
+                        <select id="mentor-especialidad" required>
+                            <option value="">Selecciona una especialidad</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="mentor-dia">Día:</label>
+                        <select id="mentor-dia" required>
+                            <option value="">Selecciona un día</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="mentor-horario">Horario:</label>
+                        <select id="mentor-horario" required>
+                            <option value="">Selecciona un horario</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Guardar Disponibilidad</button>
+                </form>
+            </section>
+
+
+            <!-- Sección TOTAL HORARIOS -->
+            <section id="total-horarios" class="seccion-oculta seccion-total-horarios" style="display: none;">
+                <h2 class="titulo-horarios">MIS HORARIOS AGENDADOS</h2>
+                <div class="contenedor-horarios-creados">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Día</th>
+                                <th>Horario</th>
+                                <th>Especialidad</th>
+                                <th>Acciones</th> <!-- Nueva columna -->
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-horarios-body">
+                            <!-- Se llena dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <!-- Sección Solicitudes -->
+            <section class="section" id="solicitudes" style="display: none;">
+                <h2 class="solititulo">Enviar una solicitud</h2>
+                <form id="form-solicitud">
+                    <label for="motivo">Motivo:</label>
+                    <select id="motivo" required>
+                        <option value="Cambio de Rol">Cambio de Rol</option>
+                        <option value="Agregar nueva especialidad">Agregar nueva especialidad</option>
+                    </select>
+
+                    <label for="pedido">Descripción de la solicitud:</label>
+                    <textarea id="pedido" rows="4" required></textarea>
+
+                    <button type="submit">Enviar Solicitud</button>
+                </form>
+
+                <hr style="margin: 30px 0;">
+
+                <h3>Solicitudes Totales</h3>
+                <table id="tabla-solicitudes" style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                    <thead>
+                        <tr style="background-color: #007BFF; color: white;">
+                            <th>ID</th>
+                            <th>Motivo</th>
+                            <th>Pedido</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+
+            <!-- Sección CLASES del mentor -->
+            <section id="clases" class="section-clasesenteras" style="display: none;">
+                <h2>Mis Clases</h2>
+
+                <!-- Solicitudes Pendientes -->
+                <h3 class="titulo-docenteclass">Solicitudes Pendientes</h3>
+                <div id="clases-pendientes-container"></div>
+
+                <!-- Clases Aceptadas -->
+                <h3 class="titulo-docenteclass">Mis Clases Aceptadas</h3>
+                <div id="clases-confirmadas-container"></div>
+            </section>
+        </main>
+
+
+
+        <aside class="rightbar" id="rightbar">
+            <div id="contenedor-publicidad"></div>
+        </aside>
+
+
+    </div>
+    <script src="js/inicio2.js"></script>
+    <script src="https://meet.jit.si/external_api.js"></script>
+</body>
+
+<!-- MODAL PARA EDITAR HORARIO -->
+<div id="modal-editar-horario" class="modal oculto">
+    <div class="modal-contenido">
+        <h3>Editar Horario</h3>
+        <form id="form-editar-horario">
+            <label for="editar-dia">Día:</label>
+            <select id="editar-dia" required></select>
+
+            <label for="editar-horario">Horario:</label>
+            <select id="editar-horario" required></select>
+
+            <label for="editar-especialidad">Especialidad:</label>
+            <select id="editar-especialidad" required></select>
+
+            <input type="hidden" id="editar-id" />
+
+            <div class="modal-botones">
+                <button type="submit">Guardar</button>
+                <button type="button" id="cerrar-modal">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</html>

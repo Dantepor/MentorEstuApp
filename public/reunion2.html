@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Mentor - Videollamada</title>
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+<h2 id="titulo" style="text-align: center; color: #003366; font-size: 2.5rem;">
+    Mentor: Sesión en vivo
+</h2>
+<div style="display: flex; justify-content: center; margin-top: 1rem;">
+    <button onclick="cerrarSesionParaTodos()"
+        style="padding: 10px 20px; background: crimson; color: white; border: none; border-radius: 5px;">
+        Finalizar sesión para todos
+    </button>
+</div>
+    <div id="jitsi-container" style="width: 100%; height: 700px;"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('id');
+
+        if (!sessionId) {
+            document.getElementById("titulo").textContent = "⚠️ Error: ID de sesión no proporcionado";
+            throw new Error("ID de sesión no encontrado en la URL.");
+        }
+
+        const socket = io();
+        socket.emit('unirse-sala', sessionId);
+
+        function cerrarSesionParaTodos() {
+            if (confirm("¿Seguro que deseas finalizar la sesión para todos los participantes?")) {
+                socket.emit('cerrar-sesion', sessionId);
+                alert("La sesión ha sido finalizada.");
+                window.close(); // ✅ Cierra esta pestaña si fue abierta con window.open()
+            }
+        }
+
+        fetch(`/api/nombre-mentor?idSesion=${sessionId}`, { credentials: 'include' })
+            .then(res => res.json())
+            .then(data => {
+                const mentorName = data.nombre || "Mentor";
+                const mentorImg = data.imagen ? `${window.location.origin}${data.imagen}` : "https://via.placeholder.com/100";
+                const roomId = `SalaMentoria_${sessionId}`;
+                const domain = "meet.jit.si";
+
+                const options = {
+                    roomName: roomId,
+                    parentNode: document.getElementById("jitsi-container"),
+                    userInfo: {
+                        displayName: mentorName,
+                        avatarURL: mentorImg
+                    },
+                    configOverwrite: {
+                        prejoinPageEnabled: false
+                    },
+                    interfaceConfigOverwrite: {
+                        SHOW_JITSI_WATERMARK: false,
+                        HIDE_DEEP_LINKING_LOGO: true,
+                        SHOW_BRAND_WATERMARK: false,
+                        SHOW_POWERED_BY: false
+                    }
+                };
+
+                new JitsiMeetExternalAPI(domain, options);
+            })
+            .catch(error => {
+                document.getElementById("titulo").textContent = "⚠️ Error al cargar la videollamada";
+                console.error("Error al obtener nombre del mentor:", error);
+            });
+    </script>
+</body>
+
+</html>

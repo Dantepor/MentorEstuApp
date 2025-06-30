@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario Login</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="izquierda">
+            <!-- Puedes agregar imagen, texto o lo que desees aquí -->
+        </div>
+        <div class="derecha">
+            <form class="formulario login-form">
+                <img src="img/logo1.png" alt="Imagen Encabezado" />
+
+                <input type="email" name="email" placeholder="Correo Electronico*" class="input-box" required />
+                <input type="password" name="password" placeholder="Contraseña*" class="input-box" required />
+
+                <div class="checkbox-area">
+                    <div class="checkbox-left">
+                        <input type="checkbox" id="recordar" name="recordar" />
+                        <label for="recordar">Recordar</label>
+                    </div>
+                    <a href="#" class="olvido">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" class="btn btn-blue">Iniciar Sesión</button>
+
+                <a class="btn btn-google" href="/auth/google">
+                    <img src="img/google.png" />
+                    Continuar con Google
+                </a>
+
+                <div class="divider">O</div>
+
+                <a href="registro.html" class="btn btn-google">Crear cuenta</a>
+
+                <div class="promo-text">
+                    Dale el toque Pro a tu auditoría, con Auditus Pro.
+                    Accede a servicios confiables, rápidos y 100% digitales.
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const form = document.querySelector('.login-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = form.email.value;
+            const password = form.password.value;
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password }),
+                    credentials: 'include' // <--- agregar esta línea
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    alert('Error: ' + errorText);
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (data.userId) {
+                    sessionStorage.setItem('userId', data.userId);
+
+                    if (data.rolId === 4) {
+                        window.location.href = '/primerol.html';
+                    } else if (data.rolId === 1) {
+                        window.location.href = '/inicio2.html';
+                    } else if (data.rolId === 2) {
+                        window.location.href = '/inicio.html';
+                    } else if (data.rolId === 3) {
+                        window.location.href = '/admin.html';
+                    } else {
+                        alert('Rol no reconocido');
+                    }
+                } else {
+                    alert('Usuario o contraseña incorrectos');
+                }
+
+            } catch (error) {
+                alert('Error al iniciar sesión');
+                console.error(error);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

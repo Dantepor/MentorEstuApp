@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecciona tu rol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background-color: #f5f5f5;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 4px solid #2196f3;
+            box-shadow: 0 0 20px rgba(33, 150, 243, 0.3);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90%;
+        }
+
+        .card img {
+            width: 20rem;
+            height: 15rem;
+            object-fit: contain;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        button {
+            padding: 16px 36px;
+            margin: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+        .estudiante {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .mentor {
+            background-color: #2196f3;
+            color: white;
+        }
+
+        /* 📱 Estilos para celulares */
+        @media (max-width: 600px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .card img {
+                width: 70%;
+                max-width: 180px;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 25px;
+            }
+
+            button {
+                padding: 14px 28px;
+                font-size: 16px;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <img src="img/logo1.png" alt="Usuario">
+        <h2>Bienvenido a MentorEstu. ¿Usted qué usuario desea ser?</h2>
+        <button class="estudiante" onclick="seleccionarRol(2)">Estudiante</button>
+        <button class="mentor" onclick="seleccionarRol(1)">Mentor</button>
+    </div>
+
+    <script>
+        async function seleccionarRol(rol) {
+            const res = await fetch('/api/auth/seleccionar-rol', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ rol_id: rol })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                window.location.href = data.redirectTo;
+            } else {
+                alert('Error al asignar el rol');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
