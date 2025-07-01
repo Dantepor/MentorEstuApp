@@ -2070,38 +2070,56 @@ main {
 /* Dropdown de notificaciones */
 .notificaciones-dropdown {
     position: absolute;
-    right: 80px;
     top: 60px;
-    width: 320px;
-    background-color: #003A6D;
-    color: white;
+    right: 20px;
+    background-color: #f0f0f0; /* Contenedor gris */
     border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-    z-index: 999;
-    max-height: 400px; /* Límite visible del panel */
-    overflow-y: auto;  /* Scroll si hay muchas clases */
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    z-index: 1000;
+}
+
+.notificaciones-titulo {
+    color: #003A6D;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notificaciones-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 220px;
+    overflow-y: auto;
 }
 
 .notificacion-item {
-    background-color: white;
-    color: black;
-    padding: 10px;
-    margin-bottom: 8px;
+    background-color: #ffffff; /* Blanco */
+    border-left: 4px solid #003A6D; /* Borde azul a la izquierda */
+    padding: 10px 12px;
     border-radius: 6px;
     font-size: 0.9rem;
+    line-height: 1.4;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .notificacion-item button {
     margin-top: 8px;
     background-color: #003A6D;
     color: white;
+    padding: 6px 12px;
     border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 0.8rem;
+    width: 100%;
+    font-weight: bold;
 }
+
 
 .notificacion-item button:hover {
     background-color: #00529F;

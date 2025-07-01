@@ -1122,6 +1122,7 @@ function toggleNotificaciones() {
     panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
 }
 
+
 function cargarNotificacionesHoy() {
     fetch('/api/mis-clases-hoy')
         .then(res => res.json())
@@ -1130,9 +1131,6 @@ function cargarNotificacionesHoy() {
             const contador = document.getElementById('contador-clases');
 
             if (clases.length > 0) {
-                // Ordenar clases por hora de inicio ascendente
-                clases.sort((a, b) => a.hora_inicio.localeCompare(b.hora_inicio));
-
                 contador.textContent = clases.length;
                 contador.style.display = 'inline';
                 contenedor.innerHTML = '';
@@ -1141,16 +1139,17 @@ function cargarNotificacionesHoy() {
                     const div = document.createElement('div');
                     div.classList.add('notificacion-item');
 
-                    // Formatear la fecha YYYY-MM-DD
-                    const fechaFormateada = new Date(clase.fecha).toISOString().split('T')[0];
+                    // Formato limpio de hora y fecha
+                    const horaInicio = clase.hora_inicio.slice(0, 5); // "HH:MM"
+                    const horaFinal = clase.hora_final.slice(0, 5);
+                    const fecha = clase.fecha.split('T')[0]; // "YYYY-MM-DD"
 
                     div.innerHTML = `
-                        📌 Clase con <strong>${clase.mentor_nombre}</strong><br>
-                        🕒 ${clase.hora_inicio} - ${clase.hora_final}<br>
-                        📅 ${fechaFormateada}<br>
-                        <button onclick="irAClases()">Entrar a la reunión</button>
+                        📌 No olvides tu clase con <strong>${clase.mentor_nombre}</strong><br>
+                        🕒 ${horaInicio} - ${horaFinal}<br>
+                        📅 ${fecha}
+                        <button onclick="irASeccionClases()">Entrar a la reunión</button>
                     `;
-
                     contenedor.appendChild(div);
                 });
             } else {
