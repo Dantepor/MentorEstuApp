@@ -1382,3 +1382,58 @@ function confirmarCierreSesion() {
         window.location.href = "/login.html";
     }
 }
+
+
+
+
+
+function toggleNotificacionesMentor() {
+    const panel = document.getElementById('panel-notificaciones-mentor');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+}
+
+function irAClasesMentor() {
+    const clasesBtn = document.querySelector('[data-section="clases"]');
+    if (clasesBtn) clasesBtn.click();
+    toggleNotificacionesMentor();
+}
+
+function cargarNotificacionesHoyMentor() {
+    fetch('/api/mis-clases-hoy-mentor')
+        .then(res => res.json())
+        .then(clases => {
+            const contenedor = document.getElementById('lista-notificaciones-mentor');
+            const contador = document.getElementById('contador-clases-mentor');
+
+            if (clases.length > 0) {
+                contador.textContent = clases.length;
+                contador.style.display = 'inline';
+                contenedor.innerHTML = '';
+
+                clases.forEach(clase => {
+                    const div = document.createElement('div');
+                    div.classList.add('notificacion-item');
+
+                    const horaInicio = clase.hora_inicio.slice(0, 5);
+                    const horaFinal = clase.hora_final.slice(0, 5);
+                    const fecha = clase.fecha.split('T')[0];
+
+                    div.innerHTML = `
+                        📌 Clase con <strong>${clase.aprendiz_nombre}</strong><br>
+                        🕒 ${horaInicio} - ${horaFinal}<br>
+                        📅 ${fecha}
+                        <button onclick="irAClasesMentor()">Entrar a la reunión</button>
+                    `;
+                    contenedor.appendChild(div);
+                });
+            } else {
+                contador.style.display = 'none';
+                contenedor.innerHTML = `<p>Hoy no tienes clases programadas.</p>`;
+            }
+        })
+        .catch(err => {
+            console.error('Error al obtener notificaciones:', err);
+        });
+}
+
+window.addEventListener('DOMContentLoaded', cargarNotificacionesHoyMentor);

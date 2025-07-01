@@ -258,4 +258,32 @@ router.get("/mis-clases-hoy", (req, res) => {
     });
 });
 
+
+// 📍 /api/mis-clases-hoy-mentor
+router.get("/mis-clases-hoy-mentor", (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) return res.status(401).json({ error: "No autenticado" });
+
+    const hoy = new Date().toISOString().split('T')[0];
+
+    const query = `
+        SELECT s.fecha, s.hora_inicio, s.hora_final, u.nombre_completo AS aprendiz_nombre
+        FROM sesiones s
+        JOIN usuarios u ON s.aprendiz_id = u.id
+        WHERE s.mentor_id = ? AND s.fecha = ? AND s.estado = 'confirmada'
+        ORDER BY s.hora_inicio ASC
+    `;
+
+    db.query(query, [userId, hoy], (err, results) => {
+        if (err) {
+            console.error('Error al obtener clases de hoy para mentor:', err);
+            return res.status(500).json({ error: "Error al obtener clases" });
+        }
+        res.json(results);
+    });
+});
+
+
+
 module.exports = router;

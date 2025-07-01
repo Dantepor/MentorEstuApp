@@ -24,7 +24,17 @@
         <div class="header-right">
             <!-- 3 imágenes a la izquierda del avatar -->
             <img src="img/calen.png" class="extra-img" alt="calendario">
-            <img src="img/campana.png" class="extra-img" alt="campana">
+            <!-- Icono de campana con contador -->
+            <div class="notificacion-wrapper" onclick="toggleNotificacionesMentor()">
+                <img src="img/campana.png" class="extra-img" alt="campana">
+                <span id="contador-clases-mentor" class="notificacion-badge" style="display: none;">0</span>
+            </div>
+
+            <!-- Modal de notificaciones -->
+            <div id="panel-notificaciones-mentor" class="notificaciones-dropdown" style="display: none;">
+                <h4 style="color: #003A6D; margin-bottom: 0.5rem; margin-top: 0.5rem;">Notificaciones de hoy</h4>
+                <div id="lista-notificaciones-mentor" class="notificaciones-scroll"></div>
+            </div>
             <img src="img/cerrar.png" class="extra-img" alt="notificacion" onclick="confirmarCierreSesion()">
 
             <!-- Avatar con punto verde e info oculta -->
