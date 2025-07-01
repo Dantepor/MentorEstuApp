@@ -7,7 +7,7 @@ const AuthService = {
             try {
                 const hashedPassword = await bcrypt.hash(password, 10);
                 const fecha = new Date();
-                const imagenNombre = '';
+                const imagenNombre = 'basicperfil.png'; // Imagen por defecto
 
                 db.query(
                     'INSERT INTO usuarios (nombre_completo, correo, contraseña, rol_id, fecha_registro, imagen) VALUES (?, ?, ?, ?, ?, ?)',

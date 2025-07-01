@@ -13,9 +13,13 @@ router.get('/google/callback',
 
         // Redirigir según rol
         if (req.user.rol_id === 1) {
-            res.redirect('/inicio2.html');
+            res.redirect('/inicio2.html'); // Mentor
         } else if (req.user.rol_id === 2) {
-            res.redirect('/inicio.html');
+            res.redirect('/inicio.html'); // Estudiante
+        } else if (req.user.rol_id === 3) {
+            res.redirect('/admin.html'); // Admin, si lo usas
+        } else if (req.user.rol_id === 4) {
+            res.redirect('/primerol.html'); // Usuario nuevo, debe elegir rol
         } else {
             res.status(403).send('Rol no reconocido');
         }
