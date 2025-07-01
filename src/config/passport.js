@@ -16,16 +16,17 @@ passport.use(new GoogleStrategy({
             if (err) return done(err);
 
             if (results.length === 0) {
-                // Si no existe, lo registramos con rol_id = 4 (nuevo usuario)
+                // Si no existe, lo registramos con rol_id = 4 (nuevo usuario) y una imagen por defecto
                 db.query(
-                    'INSERT INTO usuarios (nombre_completo, correo, rol_id, fecha_registro) VALUES (?, ?, ?, ?)',
-                    [profile.displayName, email, 4, new Date()],
+                    'INSERT INTO usuarios (nombre_completo, correo, rol_id, fecha_registro, imagen) VALUES (?, ?, ?, ?, ?)',
+                    [profile.displayName, email, 4, new Date(), 'basicperfil.png'],
                     (err, result) => {
                         if (err) return done(err);
                         return done(null, {
                             id: result.insertId,
                             correo: email,
-                            rol_id: 4 // Importante: para saber dónde redirigir
+                            rol_id: 4,
+                            imagen: 'basicperfil.png'
                         });
                     }
                 );

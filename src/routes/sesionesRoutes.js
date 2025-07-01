@@ -232,4 +232,30 @@ router.get('/publicidad', (req, res) => {
 });
 
 
+
+// 📍 Ruta: /api/mis-clases-hoy
+router.get("/mis-clases-hoy", (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) return res.status(401).json({ error: "No autenticado" });
+
+    const hoy = new Date().toISOString().split('T')[0]; // formato YYYY-MM-DD
+
+    const query = `
+        SELECT s.fecha, s.hora_inicio, s.hora_final, u.nombre_completo AS mentor_nombre
+        FROM sesiones s
+        JOIN usuarios u ON s.mentor_id = u.id
+        WHERE s.aprendiz_id = ? AND s.fecha = ? AND s.estado = 'confirmada'
+        ORDER BY s.hora_inicio ASC
+    `;
+
+    db.query(query, [userId, hoy], (err, results) => {
+        if (err) {
+            console.error('Error al obtener clases de hoy:', err);
+            return res.status(500).json({ error: "Error al obtener clases" });
+        }
+        res.json(results);
+    });
+});
+
 module.exports = router;

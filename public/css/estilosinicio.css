@@ -2046,7 +2046,53 @@ main {
     transform: scale(1.02);
 }
 
+.notificacion-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
 
+.notificacion-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+/* Dropdown de notificaciones */
+.notificaciones-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    width: 280px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 0.5rem;
+    z-index: 9999;
+    padding: 1rem;
+}
+
+.notificaciones-dropdown h4 {
+    margin-top: 0;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.notificacion-item {
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #f2f2f2;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
 
 
 

@@ -1114,3 +1114,48 @@ function confirmarCierreSesion() {
         window.location.href = "/login.html";
     }
 }
+
+
+// Mostrar/ocultar panel
+function toggleNotificaciones() {
+    const panel = document.getElementById('panel-notificaciones');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+}
+
+// Cargar notificaciones de clases de hoy
+function cargarNotificacionesHoy() {
+    fetch('/api/mis-clases-hoy')
+        .then(res => res.json())
+        .then(clases => {
+            const contenedor = document.getElementById('lista-notificaciones');
+            const contador = document.getElementById('contador-clases');
+
+            if (clases.length > 0) {
+                contador.textContent = clases.length;
+                contador.style.display = 'inline';
+                contenedor.innerHTML = '';
+
+                clases.forEach(clase => {
+                    const div = document.createElement('div');
+                    div.classList.add('notificacion-item');
+                    div.innerHTML = `
+                        📌 No olvides tu clase con <strong>${clase.mentor_nombre}</strong><br>
+                        🕒 ${clase.hora_inicio} - ${clase.hora_final}<br>
+                        📅 ${clase.fecha}
+                    `;
+                    contenedor.appendChild(div);
+                });
+            } else {
+                contador.style.display = 'none';
+                contenedor.innerHTML = `<p>Hoy no tienes clases programadas.</p>`;
+            }
+        })
+        .catch(err => {
+            console.error('Error al obtener notificaciones:', err);
+        });
+}
+
+// Ejecutar al cargar
+window.addEventListener('DOMContentLoaded', () => {
+    cargarNotificacionesHoy();
+});
