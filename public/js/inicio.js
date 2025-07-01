@@ -1122,7 +1122,6 @@ function toggleNotificaciones() {
     panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
 }
 
-// Cargar notificaciones de clases de hoy
 function cargarNotificacionesHoy() {
     fetch('/api/mis-clases-hoy')
         .then(res => res.json())
@@ -1131,6 +1130,9 @@ function cargarNotificacionesHoy() {
             const contador = document.getElementById('contador-clases');
 
             if (clases.length > 0) {
+                // Ordenar clases por hora de inicio ascendente
+                clases.sort((a, b) => a.hora_inicio.localeCompare(b.hora_inicio));
+
                 contador.textContent = clases.length;
                 contador.style.display = 'inline';
                 contenedor.innerHTML = '';
@@ -1138,11 +1140,17 @@ function cargarNotificacionesHoy() {
                 clases.forEach(clase => {
                     const div = document.createElement('div');
                     div.classList.add('notificacion-item');
+
+                    // Formatear la fecha YYYY-MM-DD
+                    const fechaFormateada = new Date(clase.fecha).toISOString().split('T')[0];
+
                     div.innerHTML = `
-                        📌 No olvides tu clase con <strong>${clase.mentor_nombre}</strong><br>
+                        📌 Clase con <strong>${clase.mentor_nombre}</strong><br>
                         🕒 ${clase.hora_inicio} - ${clase.hora_final}<br>
-                        📅 ${clase.fecha}
+                        📅 ${fechaFormateada}<br>
+                        <button onclick="irAClases()">Entrar a la reunión</button>
                     `;
+
                     contenedor.appendChild(div);
                 });
             } else {
@@ -1155,7 +1163,10 @@ function cargarNotificacionesHoy() {
         });
 }
 
-// Ejecutar al cargar
-window.addEventListener('DOMContentLoaded', () => {
-    cargarNotificacionesHoy();
-});
+function irAClases() {
+    const clasesBtn = document.querySelector('[data-section="clases"]');
+    if (clasesBtn) clasesBtn.click();
+    toggleNotificaciones();
+}
+
+window.addEventListener('DOMContentLoaded', cargarNotificacionesHoy);
