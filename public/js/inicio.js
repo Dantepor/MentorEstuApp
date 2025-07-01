@@ -1148,7 +1148,7 @@ function cargarNotificacionesHoy() {
                         📌 No olvides tu clase con <strong>${clase.mentor_nombre}</strong><br>
                         🕒 ${horaInicio} - ${horaFinal}<br>
                         📅 ${fecha}
-                        <button onclick="irASeccionClases()">Entrar a la reunión</button>
+                        <button onclick="irAClases()">Entrar a la reunión</button>
                     `;
                     contenedor.appendChild(div);
                 });
