@@ -2067,6 +2067,7 @@ main {
     z-index: 1000;
 }
 
+
 /* Dropdown de notificaciones */
 .notificaciones-dropdown {
     position: absolute;
@@ -2085,7 +2086,7 @@ main {
 .notificaciones-titulo {
     color: #003A6D;
     font-size: 1.2rem;
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Aumentado para separar del contenido */
     text-align: center;
     font-weight: bold;
 }
@@ -2099,8 +2100,9 @@ main {
 }
 
 .notificacion-item {
-    background-color: #ffffff; /* Blanco */
-    border-left: 4px solid #003A6D; /* Borde azul a la izquierda */
+    background-color: #ffffff;
+    border: 2px solid #003A6D; /* Borde azul en todo el rectángulo */
+    color: #003A6D; /* Color del texto */
     padding: 10px 12px;
     border-radius: 6px;
     font-size: 0.9rem;
