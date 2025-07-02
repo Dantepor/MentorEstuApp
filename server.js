@@ -21,13 +21,16 @@ const rankingRoutes = require('./src/routes/rankingRoutes');
 const mentorapiRoutes = require('./src/routes/mentorapiRoutes');
 const adminRoutes = require('./src/routes/adminRoutes');
 
+// Middlewares
+const verificarSesion = require('./src/middlewares/verificarSesion');
+const verificarAccesoPorRol = require('./src/middlewares/verificarAccesoPorRol');
 
 // Base de datos
 const db = require('./src/models/db');
 
 const app = express();
-const server = http.createServer(app); // Usamos http.Server
-const io = new Server(server);         // Socket.io vinculado al servidor
+const server = http.createServer(app);
+const io = new Server(server);
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,33 +52,50 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Rutas
+// Rutas públicas
 app.use('/api/auth', authRoutes);
 app.use('/auth', googleAuthRoutes);
-app.use('/api', userInfoRoutes);
-app.use('/api', mentoresRoutes);
-app.use('/api', sesionesRoutes);
-app.use('/api', rankingRoutes);
-app.use('/api', mentorapiRoutes);
-app.use('/api', adminRoutes);
 
-// Redirección principal
+// Rutas protegidas (API)
+app.use('/api', verificarSesion, userInfoRoutes);
+app.use('/api', verificarSesion, mentoresRoutes);
+app.use('/api', verificarSesion, sesionesRoutes);
+app.use('/api', verificarSesion, rankingRoutes);
+app.use('/api', verificarSesion, mentorapiRoutes);
+app.use('/api', verificarSesion, adminRoutes);
+
+// Rutas protegidas a archivos HTML según rol
+app.get('/inicio.html', verificarSesion, verificarAccesoPorRol, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/inicio.html'));
+});
+app.get('/inicio2.html', verificarSesion, verificarAccesoPorRol, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/inicio2.html'));
+});
+app.get('/admin.html', verificarSesion, verificarAccesoPorRol, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/admin.html'));
+});
+app.get('/reunion.html', verificarSesion, verificarAccesoPorRol, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/reunion.html'));
+});
+app.get('/reunion2.html', verificarSesion, verificarAccesoPorRol, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/reunion2.html'));
+});
+
+// Ruta pública de inicio
 app.get('/', (req, res) => res.redirect('/login.html'));
 
-// ⚡ Socket.io para control de sesiones
+// Socket.io para sesiones
 io.on('connection', (socket) => {
   console.log('🟢 Usuario conectado');
 
-  // Unirse a una sala por ID de sesión
   socket.on('unirse-sala', (idSesion) => {
     socket.join(idSesion);
     console.log(`Usuario unido a sala: ${idSesion}`);
   });
 
-  // Cuando el mentor finaliza la sesión
   socket.on('cerrar-sesion', (idSesion) => {
     console.log(`⚠️ Cerrando sala: ${idSesion}`);
-    io.to(idSesion).emit('sesion-finalizada'); // Notifica a todos los de la sala
+    io.to(idSesion).emit('sesion-finalizada');
   });
 
   socket.on('disconnect', () => {
@@ -86,5 +106,5 @@ io.on('connection', (socket) => {
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
+  console.log(`🚀 Servidor corriendo en el puerto ${PORT}`);
 });
