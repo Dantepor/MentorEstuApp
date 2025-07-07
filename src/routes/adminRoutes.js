@@ -62,7 +62,7 @@ router.delete('/eliminarusuario/:id', (req, res) => {
 router.put('/editarusuario/:id', upload.fields([{ name: 'imagen' }]), async (req, res) => {
     const id = req.params.id;
     const { nombre_completo, correo, rol_id, password } = req.body;
-    const imagen = req.file ? req.file.filename : null;
+    const imagen = req.files && req.files.imagen ? req.files.imagen[0].filename : null;
 
     try {
         let sql = `
