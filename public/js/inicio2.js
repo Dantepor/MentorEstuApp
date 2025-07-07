@@ -1215,8 +1215,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /*SECCION DE SOLICITUDES*/
-/*SECCION DE SOLICITUDES*/
+/* SECCION DE SOLICITUDES */
 document.addEventListener('DOMContentLoaded', function () {
+    let usuarioId = null;
+
+    // Obtener el ID del usuario desde la sesión
+    fetch('/api/user')
+        .then(res => {
+            if (!res.ok) throw new Error('No autorizado');
+            return res.json();
+        })
+        .then(user => {
+            usuarioId = user.id;
+            console.log('✅ Usuario autenticado con ID:', usuarioId);
+        })
+        .catch(err => {
+            console.error('❌ Error al obtener usuario:', err);
+            alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
+            window.location.href = '/login.html';
+        });
 
     // Función para mostrar la sección activa
     function mostrarSeccion(id) {
@@ -1227,25 +1244,22 @@ document.addEventListener('DOMContentLoaded', function () {
         botones.forEach(btn => btn.classList.remove('active'));
 
         const seccionActiva = document.getElementById(id);
-        if (seccionActiva) {
-            seccionActiva.style.display = 'block';
-        }
+        if (seccionActiva) seccionActiva.style.display = 'block';
 
         const botonActual = Array.from(botones).find(btn => btn.dataset.section === id);
         if (botonActual) botonActual.classList.add('active');
     }
 
-    // SECCION DE SOLICITUDES
-
+    // SECCIÓN DE SOLICITUDES
     const solicitudBtn = document.querySelector('li[data-section="solicitudes"]');
     const formSolicitud = document.getElementById('form-solicitud');
 
     if (solicitudBtn && formSolicitud) {
-
         solicitudBtn.addEventListener('click', () => {
             mostrarSeccion('solicitudes');
-            const usuarioId = document.getElementById('userId').textContent;
-            cargarSolicitudes(usuarioId); // ✅ Carga solicitudes del usuario actual
+            if (usuarioId) {
+                cargarSolicitudes(usuarioId); // ✅ Carga solicitudes del usuario actual
+            }
         });
 
         formSolicitud.addEventListener('submit', (e) => {
@@ -1253,7 +1267,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const motivo = document.getElementById('motivo').value;
             const pedido = document.getElementById('pedido').value;
-            const usuarioId = document.getElementById('userId').textContent;
+
+            if (!usuarioId) {
+                alert('No se pudo identificar al usuario.');
+                return;
+            }
 
             fetch('/api/enviarsolicitud', {
                 method: 'POST',
@@ -1265,15 +1283,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             })
                 .then(res => {
+                    console.log('🔍 Datos enviados:', { usuario_id: usuarioId, motivo, pedido });
                     if (res.ok) {
                         alert('Solicitud enviada correctamente');
                         formSolicitud.reset();
                         cargarSolicitudes(usuarioId); // ✅ Refresca tabla
                     } else {
-                        alert('Error al enviar la solicitud');
+                        alert('❌ Error al enviar la solicitud');
                     }
                 })
-                .catch(err => console.error('Error:', err));
+                .catch(err => console.error('⚠️ Error:', err));
         });
 
         function cargarSolicitudes(usuarioId) {
@@ -1299,11 +1318,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         tbody.appendChild(fila);
                     });
                 })
-                .catch(err => console.error('Error al cargar solicitudes:', err));
+                .catch(err => console.error('⚠️ Error al cargar solicitudes:', err));
         }
     }
 });
-
 
 
 
