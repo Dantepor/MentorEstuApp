@@ -998,6 +998,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             })
                 .then(res => {
+                    console.log('🔍 Datos enviados:', {
+                        usuario_id: usuarioId,
+                        motivo,
+                        pedido
+                    });
+
                     if (res.ok) {
                         alert('Solicitud enviada correctamente');
                         formSolicitud.reset();
